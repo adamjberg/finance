@@ -6,5 +6,11 @@ export const ROUTES = {
     buildViewById: (id: string) => {
       return `/accounts/${id}`;
     },
+    Balance: {
+      new: "/accounts/balance/new",
+      newWithParams: (params: { account: string }) => {
+        return `/accounts/balance/new?account=${params.account}`
+      }
+    }
   },
 };

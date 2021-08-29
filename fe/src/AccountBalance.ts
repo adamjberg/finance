@@ -1,5 +1,5 @@
 export type AccountBalance = {
-  _id: string;
+  id: string;
   balance: number;
   account: string;
   date: string;

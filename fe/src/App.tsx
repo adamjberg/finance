@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./App.css";
 import { AccountsPage } from "./pages/AccountsPage";
 import { HomePage } from "./pages/HomePage";
+import { NewAccountBalancePage } from "./pages/NewAccountBalancePage";
 import { NewAccountPage } from "./pages/NewAccountPage";
 import { ViewAccountPage } from "./pages/ViewAccountPage";
 import { ROUTES } from "./routes/Routes";
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path={ROUTES.Account.view} exact>
           <ViewAccountPage />
+        </Route>
+        <Route path={ROUTES.Account.Balance.new} exact>
+          <NewAccountBalancePage />
         </Route>
       </Switch>
     </Router>

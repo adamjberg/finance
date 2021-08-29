@@ -5,7 +5,7 @@ import { accountService } from "../services/AccountService";
 
 type Params = {
   id: string;
-}
+};
 
 export const ViewAccountPage: React.FC = (props) => {
   const history = useHistory();
@@ -17,9 +17,13 @@ export const ViewAccountPage: React.FC = (props) => {
     return null;
   }
 
-  return <div className="container">
-    <Link to={ROUTES.Account.list}>Back to all accounts</Link>
-    <h1>{account.name}</h1>
-    <div>Hello</div>
-  </div>;
+  return (
+    <div className="container">
+      <Link to={ROUTES.Account.list}>Back to all accounts</Link>
+      <h1>{account.name}</h1>
+      <Link to={ROUTES.Account.Balance.newWithParams({ account: account.id })}>
+        Create Balance
+      </Link>
+    </div>
+  );
 };
