@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+import { accountBalanceService } from "../services/AccountBalanceService";
 import { accountService } from "../services/AccountService";
 
 type Params = {
@@ -8,11 +9,11 @@ type Params = {
 };
 
 export const ViewAccountPage: React.FC = (props) => {
-  const history = useHistory();
-
   const params = useParams<Params>();
 
   const account = accountService.getById(params.id);
+  const accountBalances = accountBalanceService.getByAccount(params.id);
+
   if (!account) {
     return null;
   }
@@ -24,6 +25,23 @@ export const ViewAccountPage: React.FC = (props) => {
       <Link to={ROUTES.Account.Balance.newWithParams({ account: account.id })}>
         Create Balance
       </Link>
+
+      <table>
+        <thead>
+          <th>Balance</th>
+          <th>Date</th>
+        </thead>
+        <tbody>
+          {accountBalances.map((accountBalance) => {
+            return (
+              <tr>
+                <td>{accountBalance.balance.toFixed(2)}</td>
+                <td>{accountBalance.date}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

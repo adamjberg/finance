@@ -7,6 +7,12 @@ export class AccountBalanceService extends Service<AccountBalance> {
       key: "accountBalances"
     })
   }
+
+  public getByAccount(accountId: string) {
+    return this.entries.filter((accountBalance) => {
+      return accountBalance.account === accountId;
+    })
+  }
 }
 
 export const accountBalanceService = new AccountBalanceService();

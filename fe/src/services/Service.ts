@@ -5,7 +5,7 @@ type Identifiable = {
 }
 
 export class Service<Model extends Identifiable> {
-  private entries: Model[] = [];
+  protected entries: Model[] = [];
   private key: string = "";
 
   constructor({
