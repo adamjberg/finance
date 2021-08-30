@@ -13,4 +13,5 @@ export const ROUTES = {
       }
     }
   },
+  Export: "/export"
 };

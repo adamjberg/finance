@@ -62,6 +62,15 @@ export class Service<Model extends Identifiable> {
     this.save();
   }
 
+  public setEntries(entries: Model[]) {
+    if (entries) {
+      this.entries = entries;
+    } else {
+      this.entries = [];
+    }
+    this.save();
+  }
+
   private getId() {
     return uuidv4();
   }

@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./App.css";
 import { AccountsPage } from "./pages/AccountsPage";
+import { ExportPage } from "./pages/ExportPage";
 import { HomePage } from "./pages/HomePage";
 import { NewAccountBalancePage } from "./pages/NewAccountBalancePage";
 import { NewAccountPage } from "./pages/NewAccountPage";
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path={ROUTES.Account.Balance.new} exact>
           <NewAccountBalancePage />
+        </Route>
+        <Route path={ROUTES.Export} exact>
+          <ExportPage />
         </Route>
       </Switch>
     </Router>
