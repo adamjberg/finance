@@ -34,6 +34,7 @@ export const ViewAccountPage: React.FC = (props) => {
       </div>
       <div>
         <input
+          placeholder="CAD"
           value={currency}
           onChange={(e) => {
             setCurrency(e.currentTarget.value);
