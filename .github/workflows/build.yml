@@ -1,0 +1,30 @@
+name: Build Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          cache-dependency-path: fe/yarn.lock
+
+      - name: Install fe dependencies
+        run: yarn --cwd fe
+
+      - name: Build production app
+        run: yarn --cwd fe build
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{github.sha}}
+          path: fe/build
