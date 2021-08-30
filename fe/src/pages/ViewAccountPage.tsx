@@ -37,6 +37,7 @@ export const ViewAccountPage: React.FC = (props) => {
               <tr>
                 <td>{accountBalance.balance.toFixed(2)}</td>
                 <td>{accountBalance.date}</td>
+                <td onClick={() => { accountBalanceService.deleteById(accountBalance.id) }}><button>x</button></td>
               </tr>
             );
           })}
