@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { Account } from "../Account";
 
 type Identifiable = {
   id: string;
@@ -41,6 +42,16 @@ export class Service<Model extends Identifiable> {
       }
     }
     return null;
+  }
+
+  public updateById(id: string, update: Partial<Account>) {
+    const entry = this.getById(id);
+
+    Object.assign(entry, update);
+
+    this.save();
+
+    return entry;
   }
 
   public deleteById(id: string) {

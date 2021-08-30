@@ -33,6 +33,9 @@ export const AccountsPage: React.FC = (props) => {
             </Link>
             </td>
             <td>
+              {account.currency || "CAD"}
+            </td>
+            <td>
               {accountBalance?.balance}
             </td>
             <td>

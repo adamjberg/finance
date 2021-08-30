@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 import { accountBalanceService } from "../services/AccountBalanceService";
@@ -12,6 +13,8 @@ export const ViewAccountPage: React.FC = (props) => {
   const params = useParams<Params>();
 
   const account = accountService.getById(params.id);
+  const [currency, setCurrency] = useState(account?.currency);
+  const [name, setName] = useState(account?.name);
   const accountBalances = accountBalanceService.getByAccount(params.id);
 
   if (!account) {
@@ -21,10 +24,38 @@ export const ViewAccountPage: React.FC = (props) => {
   return (
     <div className="container">
       <Link to={ROUTES.Account.list}>Back to all accounts</Link>
-      <h1>{account.name}</h1>
-      <Link to={ROUTES.Account.Balance.newWithParams({ account: account.id })}>
-        Create Balance
-      </Link>
+      <div>
+        <input
+          value={name}
+          onChange={(e) => {
+            setName(e.currentTarget.value);
+          }}
+        ></input>
+      </div>
+      <div>
+        <input
+          value={currency}
+          onChange={(e) => {
+            setCurrency(e.currentTarget.value);
+          }}
+        ></input>
+      </div>
+
+      <button
+        onClick={() => {
+          accountService.updateById(account.id, { name, currency });
+        }}
+      >
+        Save
+      </button>
+
+      <div>
+        <Link
+          to={ROUTES.Account.Balance.newWithParams({ account: account.id })}
+        >
+          Create Balance
+        </Link>
+      </div>
 
       <table>
         <thead>
@@ -37,7 +68,13 @@ export const ViewAccountPage: React.FC = (props) => {
               <tr>
                 <td>{accountBalance.balance.toFixed(2)}</td>
                 <td>{accountBalance.date}</td>
-                <td onClick={() => { accountBalanceService.deleteById(accountBalance.id) }}><button>x</button></td>
+                <td
+                  onClick={() => {
+                    accountBalanceService.deleteById(accountBalance.id);
+                  }}
+                >
+                  <button>x</button>
+                </td>
               </tr>
             );
           })}

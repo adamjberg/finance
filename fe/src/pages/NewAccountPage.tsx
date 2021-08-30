@@ -8,7 +8,7 @@ export const NewAccountPage: React.FC = (props) => {
   const [name, setName] = useState("");
 
   async function handleSubmit() {
-    const account = await accountService.createAccount({
+    const account = await accountService.create({
       name
     });
 
